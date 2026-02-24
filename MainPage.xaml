@@ -1,34 +1,38 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="calcDistance.MainPage">
+             x:Class="calcDistance.MainPage" Title="">
 
-    <Grid>
-        <ScrollView BackgroundColor="Azure">
+    <Grid BackgroundColor="#b2c194">
+        <ScrollView BackgroundColor="#dae5e5">
 
             <VerticalStackLayout
                 Padding="30,0"
-                Spacing="25">
+                Spacing="25" Rotation="0">
 
                 
                 <Label
-                    Text="Välj start och stop destination"
+                    Text="Resekalkylator"
                     Style="{StaticResource Headline}"
                     SemanticProperties.HeadingLevel="Level1" />
+                <Label
+                    Text="Välj start och destination:"
+                    Style="{StaticResource Headline}"
+                    SemanticProperties.HeadingLevel="Level1" FontSize="Caption" />
 
                 <Grid ColumnDefinitions="*,Auto,*">
 
-                    <Picker x:Name="FromPicker" Grid.Column="0" />
+                    <Picker x:Name="FromPicker" Grid.Column="0" BackgroundColor="#e9f1f2" HeightRequest="20" MaximumHeightRequest="20" />
 
-                    <Image Source="arrow.svg" Aspect="AspectFit" HeightRequest="50" Grid.Column="1" />
+                    <Image Source="arrow.svg" Aspect="AspectFit" HeightRequest="50" Grid.Column="1" Margin="10,0" />
 
-                    <Picker x:Name="ToPicker" Grid.Column="2" />
+                    <Picker x:Name="ToPicker" Grid.Column="2" BackgroundColor="#e9f1f2" HeightRequest="20" MaximumHeightRequest="20" />
 
                 </Grid>
 
-                <Image
+                <Image 
                     Source="car.svg"
-                    HeightRequest="110"
+                    HeightRequest="250"
                     Aspect="AspectFit"
                     SemanticProperties.Description="pictrue of a car" />
 
@@ -36,16 +40,16 @@
                     Text="Vilken bil åker du med?"
                     Style="{StaticResource SubHeadline}"
                     SemanticProperties.HeadingLevel="Level1" />
-                
 
-                <Picker x:Name="PickerCar" />
+
+                <Picker x:Name="PickerCar" HeightRequest="20" MaximumHeightRequest="20" BackgroundColor="#e9f1f2" />
 
                 <Button
                     x:Name="CalculateBtn"
-                    Text="Calculate" 
+                    Text="Beräkna" 
                     SemanticProperties.Hint="Calculates distance and consumption"
                     Clicked="CalculateBtn_Clicked"
-                    HorizontalOptions="Fill" />
+                    HorizontalOptions="Fill" MaximumWidthRequest="100" MinimumWidthRequest="100" BackgroundColor="#b2c194" TextColor="#000000" BorderColor="#000000" />
                 <Label
                     Text=""
                     Style="{StaticResource SubHeadline}"

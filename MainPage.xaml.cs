@@ -1,4 +1,7 @@
-﻿namespace calcDistance
+﻿using calcDistance.Models;
+using Location = calcDistance.Models.Location;
+
+namespace calcDistance
 {
     public partial class MainPage : ContentPage
     {
@@ -10,6 +13,7 @@
             LoadDataAsync();
         }
 
+        //  Asynchronously loads cars and locations from the database and populates the Pickers. If an error occurs, it displays an alert with the error message.
         private async void LoadDataAsync()
         {
             try
@@ -17,35 +21,31 @@
                 var cars = await _db.GetCarsAsync();
                 var locations = await _db.GetLocationsAsync();
 
-                // Fill the PickerCar with the list of cars
                 PickerCar.ItemsSource = cars;
-                // Fill the FromPicker with the list of start locations
                 FromPicker.ItemsSource = locations;
-                // Fill the ToPicker with the list of destinations
                 ToPicker.ItemsSource = locations;
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Database Error", ex.Message, "OK");
+                await DisplayAlertAsync("Database Error", ex.Message, "OK");
             }
         }
 
-        private void CalculateBtn_Clicked(object sender, EventArgs e)
+        //  Event handler for the Calculate button click. It retrieves the selected start location,
+        //  destination, and car. If any of these are not selected, it shows an alert. Otherwise, it displays a message with the selected options.
+        private async void CalculateBtn_Clicked(object sender, EventArgs e)
         {
-            // calculate the distance and between FromPicker and ToPicker and display the result in the ResultLabel
-                var fromLocation = FromPicker.SelectedItem as string;
-                var toLocation = ToPicker.SelectedItem as string;
-            var selectedCar = PickerCar.SelectedItem as string;
-    
-                if (fromLocation == null || toLocation == null)
-                {
-                    DisplayAlert("Selection Error", "Please select both a starting location and a destination.", "OK");
-                    return;
-                }
-    
-                // Here you would implement the logic to calculate the distance between the two locations
-                // For demonstration purposes, we'll just display a placeholder result
-                Resultat.Text = $"Distance from {fromLocation} to {toLocation} is: [calculated distance] Using a {selectedCar}";
+            var fromLocation = FromPicker.SelectedItem as Location;
+            var toLocation = ToPicker.SelectedItem as Location;
+            var selectedCar = PickerCar.SelectedItem as Car;
+
+            if (fromLocation == null || toLocation == null || selectedCar == null)
+            {
+                await DisplayAlertAsync("Selection Error", "Please select a start, destination, and car.", "OK");
+                return;
+            }
+
+            Resultat.Text = $"Distance from {fromLocation.Name} to {toLocation.Name} using {selectedCar.Brand} ({selectedCar.Consumption} l/100km)";
         }
     }
 }
