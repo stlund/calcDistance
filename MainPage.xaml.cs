@@ -1,4 +1,5 @@
 ﻿using calcDistance.Models;
+using calcDistance.Calculations;
 using Location = calcDistance.Models.Location;
 
 namespace calcDistance
@@ -45,7 +46,20 @@ namespace calcDistance
                 return;
             }
 
-            Resultat.Text = $"Distance from {fromLocation.Name} to {toLocation.Name} using {selectedCar.Brand} ({selectedCar.Consumption} l/100km)";
+
+            var distance = Calculation.CalculateDistance(fromLocation.Lat, fromLocation.Lng, toLocation.Lat, toLocation.Lng);
+            var fuelConsumption = Calculation.CalculateFuelConsumption(distance, selectedCar.Consumption);
+            // Parses the fuel price from the FuelPriceEntry Text property. If parsing fails, it defaults to 0.
+            var fuelPrice = double.TryParse(FuelPriceEntry.Text, out var price) ? price : 0;
+
+
+            var totalCost = (distance / 10) * fuelConsumption * fuelPrice;
+            var consumptionPerMile = distance / 10;
+            var fuelUsed = consumptionPerMile * fuelConsumption;
+
+            Resultat.Text = $"Avstånd: {fromLocation.Name} till {toLocation.Name}: {distance:F2} Km\n" +
+                $"{selectedCar.Brand} beräknas dra: {consumptionPerMile:F2} L {selectedCar.FuelType}\n" +
+                $"Totalkostnad: {totalCost:F0} Kr";
         }
     }
 }

@@ -22,11 +22,11 @@
 
                 <Grid ColumnDefinitions="*,Auto,*">
 
-                    <Picker x:Name="FromPicker" Grid.Column="0" BackgroundColor="#e9f1f2" HeightRequest="20" MaximumHeightRequest="20" />
+                    <Picker x:Name="FromPicker" Grid.Column="0" BackgroundColor="#dae5e5" HeightRequest="20" MaximumHeightRequest="40" HorizontalTextAlignment="Center" />
 
                     <Image Source="arrow.svg" Aspect="AspectFit" HeightRequest="50" Grid.Column="1" Margin="10,0" />
 
-                    <Picker x:Name="ToPicker" Grid.Column="2" BackgroundColor="#e9f1f2" HeightRequest="20" MaximumHeightRequest="20" />
+                    <Picker x:Name="ToPicker" Grid.Column="2" BackgroundColor="#dae5e5" HeightRequest="20" MaximumHeightRequest="40" HorizontalTextAlignment="Center" />
 
                 </Grid>
 
@@ -37,24 +37,43 @@
                     SemanticProperties.Description="pictrue of a car" />
 
                 <Label
-                    Text="Vilken bil åker du med?"
+                    Text="Välj bil:"
                     Style="{StaticResource SubHeadline}"
-                    SemanticProperties.HeadingLevel="Level1" />
+                    SemanticProperties.HeadingLevel="Level1"
+                    FontSize="Body" />
 
+                
+                <Picker 
+                    x:Name="PickerCar"
+                    HeightRequest="20"
+                    MaximumHeightRequest="40"
+                    BackgroundColor="#dae5e5"
+                    HorizontalTextAlignment="Center" />
 
-                <Picker x:Name="PickerCar" HeightRequest="20" MaximumHeightRequest="20" BackgroundColor="#e9f1f2" />
+                <Entry x:Name="FuelPriceEntry"
+                    Placeholder="Ange bränslepriset (kr/liter)"
+                    Keyboard="Numeric"
+                    BackgroundColor="#dae5e5"
+                    HorizontalTextAlignment="Start"
+                    HeightRequest="20" />
+
+                <Label
+                    Text=""
+                    Style="{StaticResource SubHeadline}"
+                    SemanticProperties.HeadingLevel="Level1"
+                    x:Name="Resultat" FontSize="Small" TextColor="Black" />
 
                 <Button
                     x:Name="CalculateBtn"
                     Text="Beräkna" 
                     SemanticProperties.Hint="Calculates distance and consumption"
                     Clicked="CalculateBtn_Clicked"
-                    HorizontalOptions="Fill" MaximumWidthRequest="100" MinimumWidthRequest="100" BackgroundColor="#b2c194" TextColor="#000000" BorderColor="#000000" />
-                <Label
-                    Text=""
-                    Style="{StaticResource SubHeadline}"
-                    SemanticProperties.HeadingLevel="Level1"
-                    x:Name="Resultat" FontSize="Medium" TextColor="Black" />
+                    MaximumWidthRequest="100"
+                    MinimumWidthRequest="100" 
+                    BackgroundColor="#b2c194" 
+                    TextColor="#000000" BorderColor="#000000" 
+                    AnchorY="0" CornerRadius="5" 
+                    VerticalOptions="EndAndExpand" />
 
             </VerticalStackLayout>
 
