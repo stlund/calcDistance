@@ -76,5 +76,15 @@ namespace calcDistance
             command.Parameters.AddWithValue("@fuel_type", car.FuelType);
             await command.ExecuteNonQueryAsync();
         }
+        // deletes a car from the database based on the provided car ID.
+        public async Task DeleteCarAsync(int carId)
+        {
+            using var connection = new Npgsql.NpgsqlConnection(_connectionString);
+            await connection.OpenAsync();
+            //  SQL command to delete a car from the "car" table based on the car ID.
+            using var command = new Npgsql.NpgsqlCommand("DELETE FROM car WHERE car_id = @carId", connection);
+            command.Parameters.AddWithValue("@carId", carId);
+            await command.ExecuteNonQueryAsync();
+        }
     }
 }

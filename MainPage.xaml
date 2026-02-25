@@ -61,8 +61,8 @@
                         TextColor="#000000"
                         BorderColor="#000000"  />
                     <Button Grid.Column="2"
-                        x:Name="AddCar"
-                        Clicked="OnAddCategoryClicked"
+                        x:Name="DeleteCar"
+                        Clicked="OnDeleteCarClicked"
                         Margin="20,0,0,10"
                         Text="-"
                         BackgroundColor="#B2C194"

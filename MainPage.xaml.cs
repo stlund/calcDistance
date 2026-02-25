@@ -1,6 +1,7 @@
 ﻿using calcDistance.Models;
 using calcDistance.Calculations;
 using Location = calcDistance.Models.Location;
+using Android.Service.Voice;
 
 namespace calcDistance
 {
@@ -98,6 +99,32 @@ namespace calcDistance
                 LoadDataAsync();
 
                 await DisplayAlert("Klar", $"{brand} har lagts till!", "OK");
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Database Error", ex.Message, "OK");
+            }
+        }
+
+        // on delete car button click, shows a prompt to select a car to delete and removes it from the database.
+        private async void OnDeleteCarClicked(object sender, EventArgs e)
+        {
+            var cars = await _db.GetCarsAsync();
+            var carNames = cars.Select(c => c.Brand).ToArray();
+            var selectedCarName = await DisplayActionSheet("Välj en bil att ta bort:", "Avbryt", null, carNames);
+            if (selectedCarName == "Avbryt" || string.IsNullOrWhiteSpace(selectedCarName))
+                return;
+            var carToDelete = cars.FirstOrDefault(c => c.Brand == selectedCarName);
+            if (carToDelete == null)
+            {
+                await DisplayAlert("Fel", "Bilen kunde inte hittas.", "OK");
+                return;
+            }
+            try
+            {
+                await _db.DeleteCarAsync(carToDelete.Id);
+                LoadDataAsync();
+                await DisplayAlert("Klar", $"{selectedCarName} har tagits bort!", "OK");
             }
             catch (Exception ex)
             {
