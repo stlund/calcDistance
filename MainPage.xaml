@@ -48,22 +48,23 @@
                 
                 <!--Pick car-->
                 <Grid ColumnDefinitions="3*,1*,1*">
-                    <Picker Grid.Column="0"
+                    <Picker
+                        Grid.Column="0"
                         x:Name="PickerCar"
                         BackgroundColor="#dae5e5"
-                        HorizontalTextAlignment="Center"  />
+                        HorizontalTextAlignment="Center" Margin="0,0,0,30"  />
                     <!--Add and delete car buttons-->
                     <Button 
                         Grid.Column="1"
                         ImageSource="add.svg"
                         x:Name="AddCar"
                         Clicked="OnAddCategoryClicked"
-                        Margin="20,0,0,10"
+                        Margin="0"
                         Text=""
                         BackgroundColor="#dae5e5"
                         TextColor="#000000"
                         BorderColor="#000000"
-                        BorderWidth="1" 
+                        BorderWidth="0" 
                         Scale="0.8"  />
                     <!--Delete car button-->
                     <Button 
@@ -71,12 +72,12 @@
                         ImageSource="del.svg"
                         x:Name="DeleteCar"
                         Clicked="OnDeleteCarClicked"
-                        Margin="20,0,0,10"
+                        Margin="0"
                         Text=""
                         BackgroundColor="#dae5e5"
                         TextColor="#000000"
                         BorderColor="#000000"
-                        BorderWidth="1"
+                        BorderWidth="0"
                         Scale="0.8" />
 
                 </Grid>
