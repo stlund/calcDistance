@@ -12,6 +12,7 @@
 
                 
                 <Label
+                    Padding="10"
                     Text="Resekalkylator"
                     Style="{StaticResource Headline}"
                     SemanticProperties.HeadingLevel="Level1" />
@@ -29,7 +30,7 @@
                     <Picker x:Name="ToPicker" Grid.Column="2" BackgroundColor="#dae5e5" HeightRequest="20" MaximumHeightRequest="40" HorizontalTextAlignment="Center" />
 
                 </Grid>
-
+                <!--Car image-->
                 <Image 
                     Source="car.svg"
                     HeightRequest="250"
@@ -41,28 +42,48 @@
                     Style="{StaticResource SubHeadline}"
                     SemanticProperties.HeadingLevel="Level1"
                     FontSize="Body" />
+                
+
 
                 
-                <Picker 
-                    x:Name="PickerCar"
-                    HeightRequest="20"
-                    MaximumHeightRequest="40"
-                    BackgroundColor="#dae5e5"
-                    HorizontalTextAlignment="Center" />
+                <!--Pick car-->
+                <Grid ColumnDefinitions="3*,1*,1*">
+                    <Picker Grid.Column="0"
+                        x:Name="PickerCar"
+                        BackgroundColor="#dae5e5"
+                        HorizontalTextAlignment="Center"  />
+                    <Button Grid.Column="1"
+                        x:Name="AddCar"
+                        Clicked="OnAddCategoryClicked"
+                        Margin="20,0,0,10"
+                        Text="+"
+                        BackgroundColor="#B2C194"
+                        TextColor="#000000"
+                        BorderColor="#000000"  />
+                    <Button Grid.Column="2"
+                        x:Name="AddCar"
+                        Clicked="OnAddCategoryClicked"
+                        Margin="20,0,0,10"
+                        Text="-"
+                        BackgroundColor="#B2C194"
+                        TextColor="#000000"
+                        BorderColor="#000000"  />
 
+                </Grid>
+                <!--Enter fuelprice-->
                 <Entry x:Name="FuelPriceEntry"
                     Placeholder="Ange bränslepriset (kr/liter)"
                     Keyboard="Numeric"
                     BackgroundColor="#dae5e5"
                     HorizontalTextAlignment="Start"
                     HeightRequest="20" />
-
+                <!--Result-->
                 <Label
                     Text=""
                     Style="{StaticResource SubHeadline}"
                     SemanticProperties.HeadingLevel="Level1"
                     x:Name="Resultat" FontSize="Small" TextColor="Black" />
-
+                <!--Calculate button-->
                 <Button
                     x:Name="CalculateBtn"
                     Text="Beräkna" 

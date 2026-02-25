@@ -63,5 +63,18 @@ namespace calcDistance
 
             return locations;
         }
+        //  Adds a new car to the database using the provided Car object.
+        public async Task AddCarAsync(Car car)
+        {
+            using var connection = new Npgsql.NpgsqlConnection(_connectionString);
+            await connection.OpenAsync();
+            //  SQL command to insert a new car into the "car" table.
+            using var command = new Npgsql.NpgsqlCommand(
+                "INSERT INTO car (brand, consumption, fuel_type) VALUES (@brand, @consumption, @fuel_type)", connection);
+            command.Parameters.AddWithValue("@brand", car.Brand);
+            command.Parameters.AddWithValue("@consumption", car.Consumption);
+            command.Parameters.AddWithValue("@fuel_type", car.FuelType);
+            await command.ExecuteNonQueryAsync();
+        }
     }
 }

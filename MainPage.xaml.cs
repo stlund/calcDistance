@@ -28,7 +28,7 @@ namespace calcDistance
             }
             catch (Exception ex)
             {
-                await DisplayAlertAsync("Database Error", ex.Message, "OK");
+                await DisplayAlert("Database Error", ex.Message, "OK");
             }
         }
 
@@ -42,7 +42,7 @@ namespace calcDistance
 
             if (fromLocation == null || toLocation == null || selectedCar == null)
             {
-                await DisplayAlertAsync("Selection Error", "Please select a start, destination, and car.", "OK");
+                await DisplayAlert("Selection Error", "Please select a start, destination, and car.", "OK");
                 return;
             }
 
@@ -60,6 +60,49 @@ namespace calcDistance
             Resultat.Text = $"Avstånd: {fromLocation.Name} till {toLocation.Name}: {distance:F2} Km\n" +
                 $"{selectedCar.Brand} beräknas dra: {consumptionPerMile:F2} L {selectedCar.FuelType}\n" +
                 $"Totalkostnad: {totalCost:F0} Kr";
+        }
+
+        //  Event handler for the Add Car button click. Shows a series of prompts to collect car details and saves the new car to the database.
+        private async void OnAddCategoryClicked(object sender, EventArgs e)
+        {
+            // Prompt for brand
+            var brand = await DisplayPromptAsync("Ny bil", "Ange bilmärke:", "OK", "Avbryt");
+            if (string.IsNullOrWhiteSpace(brand))
+                return;
+
+            // Prompt for fuel consumption
+            var consumptionStr = await DisplayPromptAsync("Ny bil", "Ange förbrukning (l/100km):", "OK", "Avbryt", keyboard: Keyboard.Numeric);
+            if (string.IsNullOrWhiteSpace(consumptionStr) || !double.TryParse(consumptionStr, out var consumption))
+            {
+                await DisplayAlert("Fel", "Ogiltig förbrukning.", "OK");
+                return;
+            }
+
+            // Prompt for fuel type
+            var fuelType = await DisplayPromptAsync("Ny bil", "Ange bränsletyp (t.ex. Petrol, Diesel):", "OK", "Avbryt");
+            if (string.IsNullOrWhiteSpace(fuelType))
+                return;
+
+            try
+            {
+                var newCar = new Car
+                {
+                    Brand = brand,
+                    Consumption = consumption,
+                    FuelType = fuelType
+                };
+
+                await _db.AddCarAsync(newCar);
+
+                // Reload the car picker to include the new car
+                LoadDataAsync();
+
+                await DisplayAlert("Klar", $"{brand} har lagts till!", "OK");
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Database Error", ex.Message, "OK");
+            }
         }
     }
 }
