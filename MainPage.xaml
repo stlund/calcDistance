@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="calcDistance.MainPage" Title="">
 
-    <Grid BackgroundColor="#b2c194">
+    <Grid BackgroundColor="#b7d5ce">
         <ScrollView BackgroundColor="#dae5e5">
 
             <VerticalStackLayout
@@ -52,20 +52,22 @@
                         x:Name="PickerCar"
                         BackgroundColor="#dae5e5"
                         HorizontalTextAlignment="Center"  />
+                    <!--Add and delete car buttons-->
                     <Button Grid.Column="1"
                         x:Name="AddCar"
                         Clicked="OnAddCategoryClicked"
                         Margin="20,0,0,10"
                         Text="+"
-                        BackgroundColor="#B2C194"
+                        BackgroundColor="#b7d5ce"
                         TextColor="#000000"
                         BorderColor="#000000"  />
+                    <!--Delete car button-->
                     <Button Grid.Column="2"
                         x:Name="DeleteCar"
                         Clicked="OnDeleteCarClicked"
                         Margin="20,0,0,10"
                         Text="-"
-                        BackgroundColor="#B2C194"
+                        BackgroundColor="#b7d5ce"
                         TextColor="#000000"
                         BorderColor="#000000"  />
 
@@ -91,7 +93,7 @@
                     Clicked="CalculateBtn_Clicked"
                     MaximumWidthRequest="100"
                     MinimumWidthRequest="100" 
-                    BackgroundColor="#b2c194" 
+                    BackgroundColor="#b7d5ce" 
                     TextColor="#000000" BorderColor="#000000" 
                     AnchorY="0" CornerRadius="5" 
                     VerticalOptions="EndAndExpand" />

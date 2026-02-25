@@ -2,6 +2,7 @@
 using calcDistance.Calculations;
 using Location = calcDistance.Models.Location;
 using Android.Service.Voice;
+using Android.Provider;
 
 namespace calcDistance
 {
@@ -57,6 +58,10 @@ namespace calcDistance
             var totalCost = (distance / 10) * fuelConsumption * fuelPrice;
             var consumptionPerMile = distance / 10;
             var fuelUsed = consumptionPerMile * fuelConsumption;
+
+            await DisplayAlert("Beräknad kostnad och avstånd:", $"Avstånd: {fromLocation.Name} till {toLocation.Name}: {distance:F2} Km\n" +
+                $"{selectedCar.Brand} beräknas dra: {consumptionPerMile:F2} L {selectedCar.FuelType}\n" +
+                $"Totalkostnad: {totalCost:F0} Kr", "OK");
 
             Resultat.Text = $"Avstånd: {fromLocation.Name} till {toLocation.Name}: {distance:F2} Km\n" +
                 $"{selectedCar.Brand} beräknas dra: {consumptionPerMile:F2} L {selectedCar.FuelType}\n" +
