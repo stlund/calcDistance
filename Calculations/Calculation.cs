@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using static Android.Provider.Telephony.Mms;
+//using static Android.Provider.Telephony.Mms;
 
 namespace calcDistance.Calculations
 {

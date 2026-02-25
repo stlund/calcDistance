@@ -53,23 +53,31 @@
                         BackgroundColor="#dae5e5"
                         HorizontalTextAlignment="Center"  />
                     <!--Add and delete car buttons-->
-                    <Button Grid.Column="1"
+                    <Button 
+                        Grid.Column="1"
+                        ImageSource="add.svg"
                         x:Name="AddCar"
                         Clicked="OnAddCategoryClicked"
                         Margin="20,0,0,10"
-                        Text="+"
-                        BackgroundColor="#b7d5ce"
+                        Text=""
+                        BackgroundColor="#dae5e5"
                         TextColor="#000000"
-                        BorderColor="#000000"  />
+                        BorderColor="#000000"
+                        BorderWidth="1" 
+                        Scale="0.8"  />
                     <!--Delete car button-->
-                    <Button Grid.Column="2"
+                    <Button 
+                        Grid.Column="2"
+                        ImageSource="del.svg"
                         x:Name="DeleteCar"
                         Clicked="OnDeleteCarClicked"
                         Margin="20,0,0,10"
-                        Text="-"
-                        BackgroundColor="#b7d5ce"
+                        Text=""
+                        BackgroundColor="#dae5e5"
                         TextColor="#000000"
-                        BorderColor="#000000"  />
+                        BorderColor="#000000"
+                        BorderWidth="1"
+                        Scale="0.8" />
 
                 </Grid>
                 <!--Enter fuelprice-->

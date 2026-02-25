@@ -1,8 +1,8 @@
 ﻿using calcDistance.Models;
 using calcDistance.Calculations;
 using Location = calcDistance.Models.Location;
-using Android.Service.Voice;
-using Android.Provider;
+//using Android.Service.Voice;
+//using Android.Provider;
 
 namespace calcDistance
 {
