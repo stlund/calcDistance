@@ -35,14 +35,14 @@
                 <Image 
                     Source="car.svg"
                     HeightRequest="250"
-                    Aspect="AspectFit"
-                    SemanticProperties.Description="pictrue of a car" />
+                    Aspect="AspectFill"
+                    SemanticProperties.Description="pictrue of a car" Margin="0" />
 
                 <Label
                     Text="Välj bil:"
                     Style="{StaticResource SubHeadline}"
                     SemanticProperties.HeadingLevel="Level1"
-                    FontSize="Body" />
+                    FontSize="Body" Margin="-280,0,0,-20" />
                 
 
 
@@ -53,7 +53,7 @@
                         Grid.Column="0"
                         x:Name="PickerCar"
                         BackgroundColor="#dae5e5"
-                        HorizontalTextAlignment="Center" Margin="0,0,0,30"  />
+                        HorizontalTextAlignment="Center" Margin="0,0,0,10"  />
                     <!--Add and delete car buttons-->
                     <Button 
                         Grid.Column="1"

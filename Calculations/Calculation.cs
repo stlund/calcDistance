@@ -36,11 +36,10 @@ namespace calcDistance.Calculations
         return distance;
         }
 
-        //  Calculates the fuel consumption based on the distance traveled and the fuel consumption rate.
+        //  Calculates the fuel consumption based on the distance traveled and the fuel consumption rate (L/mil).
         static public double CalculateFuelConsumption(double distance, double consumption)
         {
-            return (distance / 100) * consumption;
+            return (distance / 10) * consumption;
         }
-
     }
 }

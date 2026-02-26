@@ -55,10 +55,7 @@ namespace calcDistance
             // Parses the fuel price from the FuelPriceEntry Text property. If parsing fails, it defaults to 0.
             var fuelPrice = double.TryParse(FuelPriceEntry.Text, out var price) ? price : 0;
 
-
-            var totalCost = (distance / 10) * fuelConsumption * fuelPrice;
-            var consumptionPerMile = distance / 10;
-            var fuelUsed = consumptionPerMile * fuelConsumption;
+            var totalCost = fuelConsumption * fuelPrice;
 
             // Converts the fuel type to a more user-friendly format for display.
             // It checks the fuel type and assigns a corresponding string for display purposes.
@@ -81,7 +78,7 @@ namespace calcDistance
             }
 
             await DisplayAlert("Beräknad kostnad och avstånd:", $"Avstånd: {fromLocation.Name} till {toLocation.Name}: {distance:F2} Km\n" +
-                $"{selectedCar.Brand} beräknas dra: {consumptionPerMile:F2} {fuelType}\n" +
+                $"{selectedCar.Brand} beräknas dra: {fuelConsumption:F2} {fuelType}\n" +
                 $"Totalkostnad: {totalCost:F0} Kr", "OK");
         }
 
@@ -94,7 +91,7 @@ namespace calcDistance
                 return;
 
             // Prompt for fuel consumption
-            var consumptionStr = await DisplayPromptAsync("Ny bil", "Ange förbrukning (l/100km):", "OK", "Avbryt", keyboard: Keyboard.Numeric);
+            var consumptionStr = await DisplayPromptAsync("Ny bil", "Ange förbrukning (l/mil):", "OK", "Avbryt", keyboard: Keyboard.Numeric);
             if (string.IsNullOrWhiteSpace(consumptionStr) || !double.TryParse(consumptionStr, out var consumption))
             {
                 await DisplayAlert("Fel", "Ogiltig förbrukning.", "OK");
@@ -102,7 +99,7 @@ namespace calcDistance
             }
 
             // Prompt for fuel type
-            var fuelType = await DisplayPromptAsync("Ny bil", "Ange bränsletyp (t.ex. Petrol, Diesel):", "OK", "Avbryt");
+            var fuelType = await DisplayPromptAsync("Ny bil", "Ange bränsletyp (t.ex. El, Bensin eller Diesel):", "OK", "Avbryt");
             if (string.IsNullOrWhiteSpace(fuelType))
                 return;
 
