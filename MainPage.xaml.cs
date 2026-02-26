@@ -41,6 +41,7 @@ namespace calcDistance
             var fromLocation = FromPicker.SelectedItem as Location;
             var toLocation = ToPicker.SelectedItem as Location;
             var selectedCar = PickerCar.SelectedItem as Car;
+            var fuelType = selectedCar?.FuelType;
 
             if (fromLocation == null || toLocation == null || selectedCar == null)
             {
@@ -59,13 +60,29 @@ namespace calcDistance
             var consumptionPerMile = distance / 10;
             var fuelUsed = consumptionPerMile * fuelConsumption;
 
-            await DisplayAlert("Beräknad kostnad och avstånd:", $"Avstånd: {fromLocation.Name} till {toLocation.Name}: {distance:F2} Km\n" +
-                $"{selectedCar.Brand} beräknas dra: {consumptionPerMile:F2} L {selectedCar.FuelType}\n" +
-                $"Totalkostnad: {totalCost:F0} Kr", "OK");
+            // Converts the fuel type to a more user-friendly format for display.
+            // It checks the fuel type and assigns a corresponding string for display purposes.
+            // (e.x Electric becomes Kw, Petrol becomes L Bensin, etc.)
+            switch (fuelType.ToLower())
+            {
+                case "petrol":
+                    fuelType = "L Bensin";
+                    break;
+                case "diesel":
+                    fuelType = "L Diesel";
+                    break;
+                case "electric":
+                    fuelType = "Kw";
+                    break;
 
-            Resultat.Text = $"Avstånd: {fromLocation.Name} till {toLocation.Name}: {distance:F2} Km\n" +
-                $"{selectedCar.Brand} beräknas dra: {consumptionPerMile:F2} L {selectedCar.FuelType}\n" +
-                $"Totalkostnad: {totalCost:F0} Kr";
+                default:
+                    fuelType = "Okänd bränsletyp";
+                    break;
+            }
+
+            await DisplayAlert("Beräknad kostnad och avstånd:", $"Avstånd: {fromLocation.Name} till {toLocation.Name}: {distance:F2} Km\n" +
+                $"{selectedCar.Brand} beräknas dra: {consumptionPerMile:F2} {fuelType}\n" +
+                $"Totalkostnad: {totalCost:F0} Kr", "OK");
         }
 
         //  Event handler for the Add Car button click. Shows a series of prompts to collect car details and saves the new car to the database.

@@ -10,7 +10,7 @@
                 Padding="30,0"
                 Spacing="25" Rotation="0">
 
-                
+                <!--Title-->
                 <Label
                     Padding="10"
                     Text="Resekalkylator"
@@ -21,6 +21,7 @@
                     Style="{StaticResource Headline}"
                     SemanticProperties.HeadingLevel="Level1" FontSize="Caption" />
 
+                <!-- Pick start and destination -->
                 <Grid ColumnDefinitions="*,Auto,*">
 
                     <Picker x:Name="FromPicker" Grid.Column="0" BackgroundColor="#dae5e5" HeightRequest="20" MaximumHeightRequest="40" HorizontalTextAlignment="Center" />
